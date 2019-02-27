@@ -26,9 +26,16 @@ int main(){
 	bool wait_for_number = true, error = false;
 	for ( std::vector<std::string>::iterator it = elements.begin(); it != elements.end(); ++it ) {
 		bool is_number = true;
+		bool negative = false;
 		for ( std::string::iterator cit = it->begin(); cit != it->end(); ++cit)
-			if (not isdigit(*cit))
-				is_number = false;
+			if (not isdigit(*cit)){
+				if( (cit == it->begin() && *cit != '-') || cit != it->begin() ){
+					is_number = false;
+				}else{
+					negative = true;
+				}
+				
+			}
 
 		if (is_number) {
 			if (wait_for_number) {
