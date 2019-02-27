@@ -29,7 +29,7 @@ int main(){
 		bool negative = false;
 		for ( std::string::iterator cit = it->begin(); cit != it->end(); ++cit)
 			if (not isdigit(*cit)){
-				if( (cit == it->begin() && *cit != '-') || cit != it->begin() ){
+				if( (cit == it->begin() && *cit != '-') || cit != it->begin() || (cit == it->begin() && *cit == '-' && cit == it->end())){
 					is_number = false;
 				}else{
 					negative = true;
@@ -38,20 +38,20 @@ int main(){
 			}
 
 		if (is_number) {
-			if (wait_for_number) {
 				if (plus) {
+			if (wait_for_number) {
 					result += std::atoi(it->c_str());
 				} else {
 					result -= std::atoi(it->c_str());
 				}
 				wait_for_number = false;
 			} else {
-				std::cout << "ERROR" << std::endl;
+				std::cout << "ERROR1" << std::endl;
 				return -1;
 			}
 		} else {
 			if (wait_for_number) {
-				std::cout << "ERROR" << std::endl;
+				std::cout << "ERROR2" << std::endl;
 				return -1;
 			} else {
 				if ((*it) == "+"){
@@ -62,7 +62,7 @@ int main(){
 						wait_for_number = true;
 						plus = false;
 					}else {
-						std::cout << "ERROR" << std::endl;
+						std::cout << "ERROR3" << std::endl;
 						return -1;
 					}
 				}
